@@ -1,6 +1,6 @@
 Project Details :
-1. Repo Type : Bitbucket
+1. Repo Type : Gitlab
 2. Project Type : Django
-3. Project Name : BISMILLAHIRRAHMAANIRRAHIIM
-4. Project Description : PASTI BISA KALO NGGA GG LAH
+3. Project Name : test
+4. Project Description : udah diatur setting.py
 5. Stages : ["Start","Build","Test"]

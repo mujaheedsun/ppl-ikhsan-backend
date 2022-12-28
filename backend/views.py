@@ -14,6 +14,7 @@ def project_list(request, format=None):
   # return json
 
   if request.method == 'GET':
+    print('ini mau ngeget')
     projects = Project.objects.all()
     serializer = ProjectSerializer(projects, many=True)
     print(Response)
@@ -39,7 +40,7 @@ def project_list(request, format=None):
         print(string)
         file.close()
       
-      response = HttpResponse(string, content_type= 'text/plain')
+      response = HttpResponse(string,  content_type= 'text/plain')
       response['Content-Disposition'] = 'attachment; filename=test.txt'
       return response
     
