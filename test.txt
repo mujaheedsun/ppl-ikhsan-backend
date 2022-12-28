@@ -1,0 +1,6 @@
+Project Details :
+1. Repo Type : Bitbucket
+2. Project Type : Django
+3. Project Name : BISMILLAHIRRAHMAANIRRAHIIM
+4. Project Description : PASTI BISA KALO NGGA GG LAH
+5. Stages : ["Start","Build","Test"]
