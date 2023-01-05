@@ -40,7 +40,7 @@ def project_list(request, format=None):
 
             if data['projectType'] == 'React':
 
-                PATH_TO_REACT_TEMPLATE = "static/Gitlab/React/"
+                PATH_TO_REACT_TEMPLATE = "assets/Gitlab/React/"
 
                 with open(PATH_TO_REACT_TEMPLATE + 'react.template.json') as f:
                     pipeline_json = json.load(f)
@@ -70,7 +70,7 @@ def project_list(request, format=None):
             
             elif data['projectType'] == 'Django':
 
-                PATH_TO_DJANGO_TEMPLATE = "static/Gitlab/Django/"
+                PATH_TO_DJANGO_TEMPLATE = "assets/Gitlab/Django/"
 
                 with open(PATH_TO_DJANGO_TEMPLATE + 'django.template.json') as f:
                     pipeline_json = json.load(f)
@@ -100,7 +100,7 @@ def project_list(request, format=None):
 
             elif data['projectType'] == 'Springboot':
 
-                PATH_TO_SPRINGBOOT_TEMPLATE = "static/Gitlab/Springboot/"
+                PATH_TO_SPRINGBOOT_TEMPLATE = "assets/Gitlab/Springboot/"
 
                 with open(PATH_TO_SPRINGBOOT_TEMPLATE + 'springboot.template.json') as f:
                     pipeline_json = json.load(f)
