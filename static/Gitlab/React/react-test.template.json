@@ -1,0 +1,12 @@
+{
+  "name": "test-frontend",
+  "stage": "test",
+  "image": "node",
+  "script": [
+    "npm install",
+    "CI=true npm test"
+  ],
+  "only": [
+    "master"
+  ]
+}

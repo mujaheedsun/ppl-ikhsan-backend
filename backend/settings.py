@@ -23,10 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-np=7-v6l#sn%ie@%ckb2jzt4=yj*7beiizf9-p5zjxc@!h%#)^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-
-
+DEBUG = True
 
 # Application definition
 
@@ -136,7 +133,9 @@ CORS_ALLOWED_ORIGINS = [
     ]
 
 ALLOWED_HOSTS = [
-    'http://localhost',
     'https://ppl-ikhsan.vercel.app',
-    'localhost'
+    'localhost',
+    'https://mujaheedsun.pythonanywhere.com',
+    'mujaheedsun.pythonanywhere.com',
+    'http://localhost:8000',
     ]

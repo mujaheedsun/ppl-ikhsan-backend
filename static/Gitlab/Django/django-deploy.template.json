@@ -1,0 +1,12 @@
+{
+  "name": "deploy-backend",
+  "stage": "deploy",
+  "image": "python",
+  "script": [
+    "pip install -r requirements.txt",
+    "bash ./deploy.sh"
+  ],
+  "only": [
+    "master"
+  ] 
+}

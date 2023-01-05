@@ -1,0 +1,17 @@
+{
+  "cache" : {
+    "paths" : [
+      ".cahce/pip",
+      "node_modules/"
+    ]
+  },
+
+  "stages": [],
+
+  "before_script": [
+    "python -m pip install --upgrade pip",
+    "pip install poetry",
+    "poetry install --no-dev"
+  ]
+
+}

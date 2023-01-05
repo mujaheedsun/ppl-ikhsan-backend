@@ -1,0 +1,19 @@
+{
+  "name": "build",
+  "stage": "build",
+  "image": "openjdk:14-jdk",
+  "script": [
+    "mvn install",
+    "mvn $MAVEN_CLI_OPTS clean package"
+  ],
+
+  "artifacts" : {
+    "paths" : [
+      "target/*.jar"
+    ]
+  },
+  
+  "only": [
+    "master"
+  ]
+}

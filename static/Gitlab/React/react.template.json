@@ -1,0 +1,7 @@
+{
+  "stages" : [],
+
+  "before_script" : [
+    "npm install -g create-react-app"
+  ]
+}

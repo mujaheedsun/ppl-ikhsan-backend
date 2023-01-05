@@ -1,0 +1,16 @@
+{
+  "name": "deploy-frontend",
+  "stage": "deploy",
+  "image": "node",
+  "script": [
+    "npm run build",
+    "cp .env.production build/.env",
+    "rsync -avz --delete-after --quiet $CI_PROJECT_DIR/build/ user@yourserver:/var/www/your-react-app/"
+  ],
+  "environtment" : {
+    "name" : "production"
+  },
+  "only": [
+    "master"
+  ]
+}

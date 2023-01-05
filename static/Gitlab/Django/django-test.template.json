@@ -1,0 +1,12 @@
+{
+  "name": "test-backend",
+  "stage": "test",
+  "image": "python",
+  "script": [
+    "pip install -r requirements.txt",
+    "python3 manage.py test"
+  ],
+  "only": [
+    "master"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "deploy",
+  "stage": "deploy",
+  "image": "openjdk:14-jdk",
+  "script": [
+    "bash ./deploy.sh"  
+  ],
+  "only": [
+    "master"
+  ]
+}

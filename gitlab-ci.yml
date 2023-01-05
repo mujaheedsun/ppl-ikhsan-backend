@@ -1,0 +1,35 @@
+cache:
+  paths:
+  - ~/.m2/repository
+variables:
+  MAVEN_CLI_OPTS: -s .mvn/settings.xml --batch-mode
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+stages:
+- build
+- test
+- deploy
+build:
+  stage: build
+  image: openjdk:14-jdk
+  script:
+  - mvn install
+  - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    paths:
+    - target/*.jar
+  only:
+  - master
+test:
+  stage: test
+  image: openjdk:14-jdk
+  script:
+  - mvn $MAVEN_CLI_OPTS test
+  only:
+  - master
+deploy:
+  stage: deploy
+  image: openjdk:14-jdk
+  script:
+  - bash ./deploy.sh
+  only:
+  - master

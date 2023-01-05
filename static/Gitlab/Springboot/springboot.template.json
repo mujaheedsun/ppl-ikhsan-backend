@@ -1,0 +1,14 @@
+{
+  "cache" : {
+    "paths" : [
+      "~/.m2/repository"
+    ]
+  },
+
+  "variables" : {
+    "MAVEN_CLI_OPTS": "-s .mvn/settings.xml --batch-mode",
+    "MAVEN_OPTS" : "-Dmaven.repo.local=.m2/repository"
+  },
+
+  "stages" : []
+}

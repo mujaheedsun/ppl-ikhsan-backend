@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "stage": "test",
+  "image": "openjdk:14-jdk",
+  "script": [
+    "mvn $MAVEN_CLI_OPTS test"
+  ],
+  "only": [
+    "master"
+  ]
+}
