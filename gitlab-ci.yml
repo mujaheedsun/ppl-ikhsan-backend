@@ -1,40 +1,33 @@
-cache:
-  paths:
-  - .cahce/pip
-  - node_modules/
 stages:
 - build
 - test
 - deploy
 before_script:
-- python -m pip install --upgrade pip
-- pip install poetry
-- poetry install --no-dev
-build-backend:
+- npm install -g create-react-app
+build-frontend:
   stage: build
-  image: python
+  image: node
   script:
-  - pip install -r requirements.txt
-  - python3 manage.py makemigrations
-  - python3 manage.py migrate
-  artifacts:
-    paths:
-    - build/
+  - npm install
+  - npm run build
   only:
   - master
-test-backend:
+test-frontend:
   stage: test
-  image: python
+  image: node
   script:
-  - pip install -r requirements.txt
-  - python3 manage.py test
+  - npm install
+  - CI=true npm test
   only:
   - master
-deploy-backend:
+deploy-frontend:
   stage: deploy
-  image: python
+  image: node
   script:
-  - pip install -r requirements.txt
-  - bash ./deploy.sh
+  - npm run build
+  - cp .env.production build/.env
+  - rsync -avz --delete-after --quiet $CI_PROJECT_DIR/build/ user@yourserver:/var/www/your-react-app/
+  environtment:
+    name: production
   only:
   - master
