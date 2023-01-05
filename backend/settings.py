@@ -133,9 +133,9 @@ CORS_ALLOWED_ORIGINS = [
     ]
 
 ALLOWED_HOSTS = [
+    'http://localhost',
     'https://ppl-ikhsan.vercel.app',
     'localhost',
     'https://mujaheedsun.pythonanywhere.com',
     'mujaheedsun.pythonanywhere.com',
-    'http://localhost:8000',
     ]
