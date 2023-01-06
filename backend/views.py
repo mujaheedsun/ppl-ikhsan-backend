@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 import yaml
+import os
 
 @api_view(['GET', 'POST'])
 def project_list(request, format=None):
@@ -36,7 +37,7 @@ def project_list(request, format=None):
             pipeline_json[stage_json['name']] = copy
 
         if data['repoType'] == 'Gitlab':            
-            print('sampe sini 1 gitlab', data)
+            print('sampe sini 1 gitlab', data, os.getcwd())
 
             if data['projectType'] == 'React':
 
@@ -128,6 +129,85 @@ def project_list(request, format=None):
 
                 print('sampe sini 2 springboot', pipeline_json)
 
+        
+        elif data['repoType'] == 'Github':            
+            print('sampe sini 1 github', data, os.getcwd())
+
+            if data['projectType'] == 'React':
+
+                PATH_TO_REACT_TEMPLATE = "assets/Github/React/"
+
+                with open(PATH_TO_REACT_TEMPLATE + 'react.template.json') as f:
+                    pipeline_json = json.load(f)
+                    f.close()
+
+                print('sampe sini 1.5', pipeline_json)
+                    
+                if 'Build' in data['stages']:
+                    build_json_1 = {
+                        "run" : "npm ci"
+                    }
+
+                    build_json_2 = {
+                        "run" : "npm run build --if-present"
+                    }
+
+                    pipeline_json['jobs']["build"]['steps'].append(build_json_1)
+                    pipeline_json['jobs']["build"]['steps'].append(build_json_2)
+                    
+
+                if 'Test' in data['stages']:
+                    test_json = {
+                        "run" : "npm test"
+                    }
+
+                    pipeline_json['jobs']["build"]['steps'].append(test_json)
+
+                if 'Deploy' in data['stages']:
+                    pass
+                    
+
+                print('sampe sini 2 react', pipeline_json)
+            
+            elif data['projectType'] == 'Django':
+
+                PATH_TO_DJANGO_TEMPLATE = "assets/Github/Django/"
+
+                with open(PATH_TO_DJANGO_TEMPLATE + 'django.template.json') as f:
+                    pipeline_json = json.load(f)
+                    f.close()
+
+                print('sampe sini 1.5', pipeline_json)
+                    
+                if 'Build' in data['stages']:
+                    build_json = {
+                        "name" : "Install Dependencies",
+                        "run" : [
+                            "python -m pip install --upgrade pip",
+                            "pip install -r requirements.txt"
+                        ]
+                    }
+                    
+                    pipeline_json["jobs"]["build"]["steps"].append(build_json)
+
+                if 'Test' in data['stages']:
+                    test_json = {
+                        "name" : "Runs Test",
+                        "run" : "python manage.py test"
+                    }
+                    
+                    pipeline_json["jobs"]["build"]["steps"].append(test_json)
+                    
+
+                if 'Deploy' in data['stages']:
+                    pass
+
+                print('sampe sini 2 django', pipeline_json)
+
+            elif data['projectType'] == 'Springboot':
+                pass
+
+
 
         with open('gitlab-ci.yml', 'w+') as yaml_file:
             yaml.dump(pipeline_json, yaml_file, sort_keys=False)
@@ -142,14 +222,6 @@ def project_list(request, format=None):
 
         return response
     
-
-
-
-
-
-
-
-
 
 
 
