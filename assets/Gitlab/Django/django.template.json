@@ -1,7 +1,7 @@
 {
   "cache" : {
     "paths" : [
-      ".cahce/pip",
+      ".cache/pip",
       "node_modules/"
     ]
   },

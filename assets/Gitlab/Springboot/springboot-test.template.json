@@ -6,6 +6,6 @@
     "mvn $MAVEN_CLI_OPTS test"
   ],
   "only": [
-    "master"
+    "main"
   ]
 }

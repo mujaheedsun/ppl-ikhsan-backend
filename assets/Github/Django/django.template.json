@@ -1,28 +1,17 @@
 {
   "name" : "Django CI",
-  "on": [
-    "Push"
-  ],  
+  "env" : {
+    "AZURE_WEBAPP_NAME": "your-app-name",
+    "PYTHON_VERSION": "3.8"
+  },
+  "on": {
+    "push" : {
+      "branches" : [ "main" ]
+    },
+    "pull_request": {
+      "branches" : [ "main" ]
+    } 
+  },
 
-  "jobs" : {
-    "build" : {
-      "runs-on" : "ubuntu-latest",
-      "strategy" : {
-        "matrix" :{
-          "python-version" : ["3.8"]
-        }
-      },
-
-      "steps" : [
-        {"uses" : "actions/checkout@v3"},
-        {
-          "name" : "Set up Python ${{ matrix.python-version }}",
-          "uses" : "actions/setup-python@v3",
-          "with" : {
-            "python-version" : "${{ matrix.python-version }}"
-          }
-        }
-      ]
-    }
-  }
+  "jobs" : {}
 }

@@ -6,6 +6,6 @@
     "bash ./deploy.sh"  
   ],
   "only": [
-    "master"
+    "main"
   ]
 }

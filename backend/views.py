@@ -36,12 +36,18 @@ def project_list(request, format=None):
             copy.pop('name')
             pipeline_json[stage_json['name']] = copy
 
+        def add_job_to_pipeline(job_json):
+            pipeline_json["jobs"][job_json['name']] = 0
+            copy = job_json.copy()
+            copy.pop('name')
+            pipeline_json["jobs"][job_json["name"]] = copy
+
         if data['repoType'] == 'Gitlab':            
             print('sampe sini 1 gitlab', data, os.getcwd())
 
             if data['projectType'] == 'React':
 
-                PATH_TO_REACT_TEMPLATE = "assets/Gitlab/React/"
+                PATH_TO_REACT_TEMPLATE = os.path.dirname(__file__) + "/../assets/Gitlab/React/"
 
                 with open(PATH_TO_REACT_TEMPLATE + 'react.template.json') as f:
                     pipeline_json = json.load(f)
@@ -71,7 +77,7 @@ def project_list(request, format=None):
             
             elif data['projectType'] == 'Django':
 
-                PATH_TO_DJANGO_TEMPLATE = "assets/Gitlab/Django/"
+                PATH_TO_DJANGO_TEMPLATE = os.path.dirname(__file__) + "/../assets/Gitlab/Django/"
 
                 with open(PATH_TO_DJANGO_TEMPLATE + 'django.template.json') as f:
                     pipeline_json = json.load(f)
@@ -101,7 +107,7 @@ def project_list(request, format=None):
 
             elif data['projectType'] == 'Springboot':
 
-                PATH_TO_SPRINGBOOT_TEMPLATE = "assets/Gitlab/Springboot/"
+                PATH_TO_SPRINGBOOT_TEMPLATE = os.path.dirname(__file__) + "/../assets/Gitlab/Springboot/"
 
                 with open(PATH_TO_SPRINGBOOT_TEMPLATE + 'springboot.template.json') as f:
                     pipeline_json = json.load(f)
@@ -135,7 +141,7 @@ def project_list(request, format=None):
 
             if data['projectType'] == 'React':
 
-                PATH_TO_REACT_TEMPLATE = "assets/Github/React/"
+                PATH_TO_REACT_TEMPLATE = os.path.dirname(__file__) + "/../assets/Github/React/"
 
                 with open(PATH_TO_REACT_TEMPLATE + 'react.template.json') as f:
                     pipeline_json = json.load(f)
@@ -144,34 +150,29 @@ def project_list(request, format=None):
                 print('sampe sini 1.5', pipeline_json)
                     
                 if 'Build' in data['stages']:
-                    build_json_1 = {
-                        "run" : "npm ci"
-                    }
-
-                    build_json_2 = {
-                        "run" : "npm run build --if-present"
-                    }
-
-                    pipeline_json['jobs']["build"]['steps'].append(build_json_1)
-                    pipeline_json['jobs']["build"]['steps'].append(build_json_2)
-                    
+                    with open(PATH_TO_REACT_TEMPLATE + 'react-build.template.json') as f:
+                        build_json_temp = json.load(f)
+                        add_job_to_pipeline(build_json_temp)
+                        f.close()
 
                 if 'Test' in data['stages']:
-                    test_json = {
-                        "run" : "npm test"
-                    }
-
-                    pipeline_json['jobs']["build"]['steps'].append(test_json)
+                    with open(PATH_TO_REACT_TEMPLATE + 'react-test.template.json') as f:
+                        test_json_temp = json.load(f)
+                        add_job_to_pipeline(test_json_temp)
+                        f.close()
 
                 if 'Deploy' in data['stages']:
-                    pass
+                    with open(PATH_TO_REACT_TEMPLATE + 'react-deploy.template.json') as f:
+                        deploy_json_temp = json.load(f)
+                        add_job_to_pipeline(deploy_json_temp)
+                        f.close()
                     
 
                 print('sampe sini 2 react', pipeline_json)
             
             elif data['projectType'] == 'Django':
 
-                PATH_TO_DJANGO_TEMPLATE = "assets/Github/Django/"
+                PATH_TO_DJANGO_TEMPLATE = os.path.dirname(__file__) + "/../assets/Github/Django/"
 
                 with open(PATH_TO_DJANGO_TEMPLATE + 'django.template.json') as f:
                     pipeline_json = json.load(f)
@@ -180,27 +181,23 @@ def project_list(request, format=None):
                 print('sampe sini 1.5', pipeline_json)
                     
                 if 'Build' in data['stages']:
-                    build_json = {
-                        "name" : "Install Dependencies",
-                        "run" : [
-                            "python -m pip install --upgrade pip",
-                            "pip install -r requirements.txt"
-                        ]
-                    }
+                    with open(PATH_TO_DJANGO_TEMPLATE + 'django-build.template.json') as f:
+                        build_json_temp = json.load(f)
+                        add_job_to_pipeline(build_json_temp)
+                        f.close()
                     
-                    pipeline_json["jobs"]["build"]["steps"].append(build_json)
-
                 if 'Test' in data['stages']:
-                    test_json = {
-                        "name" : "Runs Test",
-                        "run" : "python manage.py test"
-                    }
-                    
-                    pipeline_json["jobs"]["build"]["steps"].append(test_json)
-                    
+                    with open(PATH_TO_DJANGO_TEMPLATE + 'django-test.template.json') as f:
+                        test_json_temp = json.load(f)
+                        add_job_to_pipeline(test_json_temp)
+                        f.close()
+                                  
 
                 if 'Deploy' in data['stages']:
-                    pass
+                    with open(PATH_TO_DJANGO_TEMPLATE + 'django-deploy.template.json') as f:
+                        deploy_json_temp = json.load(f)
+                        add_job_to_pipeline(deploy_json_temp)
+                        f.close()
 
                 print('sampe sini 2 django', pipeline_json)
 

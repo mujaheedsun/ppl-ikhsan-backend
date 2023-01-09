@@ -1,3 +1,10 @@
 {
-
+  "name": "test",
+  "runs-on": "ubuntu-latest",
+  "steps": [
+    {
+      "name": "Run Test",
+      "run": "python manage.py test"
+    }
+  ]
 }

@@ -7,6 +7,6 @@
     "CI=true npm test"
   ],
   "only": [
-    "master"
+    "main"
   ]
 }
